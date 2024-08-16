@@ -76,7 +76,13 @@ game.redraw = function () {
 	// Draw the player
 	game.drawPlayer()
 
-	game.counter.innerHTML = "A game by Karol Swierczek | Controls: A, D / arrows and SPACE | Points: " + Math.round(-game.player.highestY / (3 * game.options.tileHeight)), game.canvas.width - 50, game.canvas.height - 12
+	// Calculate and display the score **
+	game.player.score = Math.round(-game.player.highestY / (3 * game.options.tileHeight));
+	game.context.font = "20px Georgia";
+	game.context.fillStyle = "black";
+	game.context.fillText("Score: " + game.player.score, game.canvas.width - 100, 30);
+
+	game.counter.innerHTML = "A game by Karol Swierczek | Controls: A, D / arrows and SPACE | Points: " + game.player.score;
 }
 
 game.requestRedraw = function () {
@@ -91,7 +97,12 @@ game.requestRedraw = function () {
 		game.context.textAlign = "center"
 		game.context.fillStyle = "black"
 		game.context.fillText("Game over!", game.canvas.width / 2, game.canvas.height / 2)
+
+		// Display the final score**
+		game.context.font = "20px Georgia"
+		game.context.fillText("Your Score: " + game.player.score, game.canvas.width / 2, game.canvas.height / 2 + 30)
+
 		game.context.font = "15px Georgia"
-		game.context.fillText("(Refresh the page to restart)", game.canvas.width / 2, game.canvas.height / 2 + 50)
+		game.context.fillText("(Refresh the page to restart)", game.canvas.width / 2, game.canvas.height / 2 + 60)
 	}
 }
